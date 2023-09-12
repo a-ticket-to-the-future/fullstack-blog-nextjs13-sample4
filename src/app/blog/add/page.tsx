@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 
 
     const postBlog = async (title: string | undefined,description: string | undefined) => {
@@ -36,8 +37,10 @@ const PostBlog = () => {
 
         // console.log(titleRef.current?.value);
         // console.log(descriptionRef.current?.value);
-
+        toast.loading("投稿中です・・・",{id:"1"});
         await postBlog(titleRef.current?.value,descriptionRef.current?.value)
+
+        toast.success("投稿に成功しました",{id:"1"});
 
         router.push("/");
         router.refresh();
@@ -46,6 +49,7 @@ const PostBlog = () => {
 
   return (
     <>
+    <Toaster />
   <div className="w-full m-auto flex my-4">
     <div className="flex flex-col justify-center items-center m-auto">
       <p className="text-2xl text-slate-50 font-bold p-3">ブログ新規作成 🚀</p>
